@@ -29,13 +29,11 @@ class LocalUpdateValidatorTest {
     @Test
     void validate__should_return_false_when_code_is_not_repeated() {
         String code = "123456";
-        Long updateId = 1L;
 
         LocalUpdateDTO localUpdateDTO = new LocalUpdateDTO();
         localUpdateDTO.setCode(code);
-        localUpdateDTO.setId(updateId);
 
-        when(localRepository.existsByCodeAndIdNot(code, updateId)).thenReturn(false);
+        when(localRepository.existsByCodeAndIdNot(code, 1L)).thenReturn(false);
 
         localUpdateValidator.validate(localUpdateDTO, errors);
 

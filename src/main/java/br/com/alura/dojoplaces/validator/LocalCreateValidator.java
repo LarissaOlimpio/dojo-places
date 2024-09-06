@@ -31,7 +31,7 @@ public class LocalCreateValidator implements Validator {
         LocalCreateDTO localCreateDTO = (LocalCreateDTO) target;
 
         if (localRepository.existsByCode(localCreateDTO.getCode())) {
-            errors.rejectValue("code", "error.localUpdateDTO", ERROR_CODE_EXISTS);
+            errors.rejectValue("code", "error.localCreateDTO", ERROR_CODE_EXISTS);
         }
 
     }
