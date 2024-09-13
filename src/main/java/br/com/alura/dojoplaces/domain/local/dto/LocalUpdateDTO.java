@@ -26,6 +26,10 @@ public class LocalUpdateDTO {
     @Size(max = 100)
     private String city;
 
+    @NotBlank(message = "O Cep não pode estar em branco")
+    @Pattern(regexp = "^[0-9]{8}$",message = "O cep deve conter apenas números")
+    private String cep;
+
     private LocalDateTime localDateTime;
 
     private boolean isDirty;
@@ -86,9 +90,19 @@ public class LocalUpdateDTO {
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
     }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public void markAsDirty(){
         this.isDirty=true;
     }
+
     public static LocalUpdateDTO fromEntity(Local local) {
         LocalUpdateDTO localUpdateDTO = new LocalUpdateDTO(local);
         localUpdateDTO.id = local.getId();
@@ -96,6 +110,7 @@ public class LocalUpdateDTO {
         localUpdateDTO.code = local.getCode();
         localUpdateDTO.neighborhood = local.getNeighborhood();
         localUpdateDTO.city = local.getCity();
+        localUpdateDTO.cep = local.getCep();
         return localUpdateDTO;
     }
 

@@ -8,6 +8,12 @@
     <div>
         <h1>Cadastro de local</h1>
         <form:form modelAttribute="localCreateDTO" method="post" action="/local/submit">
+            <h3>Preencher por CEP: </h3>
+            <label>
+                Cep:
+                <form:input path="cep"/>
+                <form:errors path="cep"/>
+            </label>
             <div>
                 <label>Nome:</label>
                 <form:input path="name"/>
@@ -34,6 +40,7 @@
         </form:form>
     </div>
     </body>
+    <script src="/assets/js/searchCepWithApi.js"></script>
     </html>
 
 

@@ -25,11 +25,16 @@ public class LocalCreateDTO {
     @Size(max = 100)
     private String city;
 
-    public LocalCreateDTO(String name, String code, String neighborhood, String city) {
+    @NotBlank(message = "O Cep não pode estar em branco")
+    @Pattern(regexp = "^[0-9]{8}$", message = "O cep deve conter apenas números")
+    private String cep;
+
+    public LocalCreateDTO(String name, String code, String neighborhood, String city, String cep) {
         this.name = name;
         this.code = code;
         this.neighborhood = neighborhood;
         this.city = city;
+        this.cep = cep;
     }
 
     public String getName() {
@@ -48,7 +53,11 @@ public class LocalCreateDTO {
         return city;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
     public Local createLocalEntity() {
-        return new Local(this.name, this.code, this.neighborhood, this.city);
+        return new Local(this.name, this.code, this.neighborhood, this.city,this.cep);
     }
 }

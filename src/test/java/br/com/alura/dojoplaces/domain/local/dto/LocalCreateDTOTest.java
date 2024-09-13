@@ -28,7 +28,7 @@ class LocalCreateDTOTest {
             "CodigoValido"
     })
     public void should_accept_code_that_follows_pattern(String code) {
-        LocalCreateDTO localCreateDTO = new LocalCreateDTO("nome", code, "bairro", "cidade");
+        LocalCreateDTO localCreateDTO = new LocalCreateDTO("nome", code, "bairro", "cidade","12230000");
 
         Set<ConstraintViolation<LocalCreateDTO>> violations = validator.validate(localCreateDTO);
 
@@ -43,7 +43,7 @@ class LocalCreateDTOTest {
             "Codigo_Nao_Valido"
     })
     public void should_reject_code_that_follows_pattern(String code) {
-        LocalCreateDTO localCreateDTO = new LocalCreateDTO("nome", code, "bairro", "cidade");
+        LocalCreateDTO localCreateDTO = new LocalCreateDTO("nome", code, "bairro", "cidade","12230000");
 
         Set<ConstraintViolation<LocalCreateDTO>> violations = validator.validate(localCreateDTO);
 

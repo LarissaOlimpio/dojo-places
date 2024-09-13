@@ -11,7 +11,7 @@ class LocalResponseDTOTest {
 
     @Test
     void calculateDaysSince__should_return_correct_number_of_days_since_last_update_or_never_updated() {
-        Local local = new Local("Nome", "Código", "Bairro", "Cidade");
+        Local local = new Local("Nome", "Código", "Bairro", "Cidade","12230000");
         local.setUpdateDate(LocalDate.now().minusDays(5));
         LocalResponseDTO localResponseDTO = new LocalResponseDTO(local);
         assertEquals("5 dias atrás", localResponseDTO.getDaysSinceLastUpdate());

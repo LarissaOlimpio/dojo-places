@@ -9,6 +9,12 @@
     <h1>Formulário de atualização de local</h1>
     <form:form modelAttribute="localUpdateDTO" method="post" action="/local/update">
         <form:hidden path="id"/>
+        <h3>Preencher por CEP: </h3>
+        <label>
+            Cep:
+            <form:input path="cep"/>
+            <form:errors path="cep"/>
+        </label>
         <div>
             <label>Nome:</label>
             <form:input path="name"/>
@@ -33,5 +39,6 @@
     </form:form>
 </div>
 </body>
+<script src="/assets/js/searchCepWithApi.js"></script>
 </html>
 

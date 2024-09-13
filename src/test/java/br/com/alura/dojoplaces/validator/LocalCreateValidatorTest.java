@@ -30,7 +30,7 @@ class LocalCreateValidatorTest {
     void validate__should_return_no_errors() {
         String uniqueCode = "123456";
 
-        LocalCreateDTO localCreateDTO = new LocalCreateDTO("Name", uniqueCode, "Neighborhood", "City");
+        LocalCreateDTO localCreateDTO = new LocalCreateDTO("Name", uniqueCode, "Neighborhood", "City","12230000");
 
         when(localRepository.existsByCode(localCreateDTO.getCode())).thenReturn(false);
 
@@ -43,7 +43,7 @@ class LocalCreateValidatorTest {
     void validate__should_return_error_when_code_local_already_exists() {
         String duplicateCode = "123456";
 
-        LocalCreateDTO localCreateDTO = new LocalCreateDTO("Name", duplicateCode, "Neighborhood", "City");
+        LocalCreateDTO localCreateDTO = new LocalCreateDTO("Name", duplicateCode, "Neighborhood", "City","12230000");
 
         when(localRepository.existsByCode(localCreateDTO.getCode())).thenReturn(true);
 

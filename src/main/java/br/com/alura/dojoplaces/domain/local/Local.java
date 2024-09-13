@@ -34,6 +34,10 @@ public class Local {
     @Size(max = 100)
     private String city;
 
+    @NotBlank
+    @Pattern(regexp = "^[0-9]{8}$",message = "O cep deve conter apenas números")
+    private String cep;
+
     @NotNull
     private LocalDate creationDate = LocalDate.now();
 
@@ -42,12 +46,15 @@ public class Local {
     public Local() {
     }
 
-    public Local(String name, String code, String neighborhood, String city) {
+    public Local(String name, String code, String neighborhood, String city, String cep) {
         this.name = name;
         this.code = code;
         this.neighborhood = neighborhood;
         this.city = city;
+        this.cep = cep;
     }
+
+
 
     public Long getId() {
         return id;
@@ -96,12 +103,20 @@ public class Local {
     public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep( String cep) {
+        this.cep = cep;
+    }
 
     public void updateLocal(@Valid LocalUpdateDTO localUpdateDTO) {
         this.name = localUpdateDTO.getName();
         this.code = localUpdateDTO.getCode();
         this.neighborhood = localUpdateDTO.getNeighborhood();
         this.city = localUpdateDTO.getCity();
+        this.cep = localUpdateDTO.getCep();
         this.updateDate = LocalDate.now();
     }
 }
