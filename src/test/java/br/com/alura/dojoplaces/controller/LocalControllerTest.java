@@ -48,11 +48,11 @@ public class LocalControllerTest {
 
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/submit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("code", "1234566666")
-                .param("name", "Name")
-                .param("city", "City")
-                .param("neighborhood", "Neighbourhood")
-                .param("cep","12230000");
+                .param("code", "ABC123")
+                .param("name", "Restaurante Central")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().is3xxRedirection())
@@ -65,10 +65,10 @@ public class LocalControllerTest {
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/submit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("code", "")
-                .param("name", "Name")
-                .param("city", "City")
-                .param("neighbourhood", "Neighbourhood")
-                .param("cep","12230000");
+                .param("name", "Restaurante Central")
+                .param("city", "São Paulo")
+                .param("neighbourhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
@@ -80,16 +80,16 @@ public class LocalControllerTest {
     @Test
     public void createLocal__should_return_error_when_code_exists() throws Exception {
 
-        Local local = new Local("Name", "123", "Neighbourhood", "City","12230000");
+        Local local = new Local("Restaurante Central", "ABC123", "Centro", "São Paulo","01001000");
         localRepository.save(local);
 
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/submit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("code", "123")
-                .param("name", "Name")
-                .param("city", "City")
-                .param("neighborhood", "Neighbourhood")
-                .param("cep","12230000");
+                .param("code", "ABC123")
+                .param("name", "Restaurante Central")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
@@ -100,8 +100,8 @@ public class LocalControllerTest {
     @Test
     public void listLocal__should_show_list_of_locals_successfully() throws Exception {
 
-        Local local1 = new Local("Name1", "123", "Neighbourhood1", "City1","12230000");
-        Local local2 = new Local("Name2", "456", "Neighbourhood2", "City2","12230000");
+        Local local1 = new Local("Padaria Pão Doce", "XYZ789", "Jardins", "São Paulo","01415000");
+        Local local2 = new Local("Mercado Central", "LMN456", "Vila Mariana", "São Paulo","04110000");
 
         localRepository.saveAll(List.of(local1, local2));
 
@@ -114,18 +114,17 @@ public class LocalControllerTest {
 
     @Test
     public void updateLocal__should_edit_local_successfully() throws Exception {
-        Local local = new Local("Name", "123", "Neighbourhood", "City","12230000");
+        Local local = new Local("Restaurante Central", "ABC123", "Centro", "São Paulo","01001000");
         localRepository.save(local);
 
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", String.valueOf(local.getId()))
-                .param("code", "123")
-                .param("name", "Updated Name")
-                .param("city", "Updated City")
-                .param("neighborhood", "Updated Neighbourhood")
-                .param("cep","12230000");
-
+                .param("code", "ABC123")
+                .param("name", "Restaurante Atualizado")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().is3xxRedirection())
@@ -140,10 +139,10 @@ public class LocalControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", String.valueOf(localId))
                 .param("code", "")
-                .param("name", "Name")
-                .param("city", "City")
-                .param("neighbourhood", "Neighbourhood")
-                .param("cep","12230000");
+                .param("name", "Restaurante Central")
+                .param("city", "São Paulo")
+                .param("neighbourhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
@@ -159,11 +158,11 @@ public class LocalControllerTest {
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", String.valueOf(nonExistentId))
-                .param("code", "123")
-                .param("name", "Updated Name")
-                .param("city", "Updated City")
-                .param("neighborhood", "Updated Neighbourhood")
-                .param("cep","12230000");
+                .param("code", "ABC123")
+                .param("name", "Restaurante Atualizado")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isNotFound());
@@ -171,7 +170,7 @@ public class LocalControllerTest {
 
     @Test
     public void deleteLocal__should_delete_a_local_successfully() throws Exception {
-        Local local = new Local("Name", "123", "Neighbourhood", "City","12230000");
+        Local local = new Local("Restaurante Central", "ABC123", "Centro", "São Paulo","01001000");
         localRepository.save(local);
 
         mockMvc.perform(post("/local/delete/{id}", local.getId()))
@@ -181,20 +180,20 @@ public class LocalControllerTest {
 
     @Test
     public void updateLocal__should_return_error_when_code_exists() throws Exception {
-        Local existingLocal = new Local("Existing Name", "123", "Existing Neighbourhood", "Existing City","12230000");
+        Local existingLocal = new Local("Restaurante Antigo", "ABC123", "Centro", "São Paulo","01001000");
         localRepository.save(existingLocal);
 
-        Local localToUpdate = new Local("Name", "456", "Neighbourhood", "City","12230000");
+        Local localToUpdate = new Local("Restaurante Novo", "XYZ789", "Centro", "São Paulo","01001000");
         localRepository.save(localToUpdate);
 
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", String.valueOf(localToUpdate.getId()))
-                .param("code", "123")
-                .param("name", "Updated Name")
-                .param("city", "Updated City")
-                .param("neighborhood", "Updated Neighbourhood")
-                .param("cep","12230000");
+                .param("code", "ABC123")
+                .param("name", "Restaurante Atualizado")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
@@ -204,17 +203,17 @@ public class LocalControllerTest {
 
     @Test
     public void updateLocal__should_allow_same_code_for_same_local() throws Exception {
-        Local local = new Local("Name", "123", "Neighbourhood", "City","12230000");
+        Local local = new Local("Restaurante Central", "ABC123", "Centro", "São Paulo","01001000");
         localRepository.save(local);
 
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = post("/local/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", String.valueOf(local.getId()))
-                .param("code", "123")
-                .param("name", "Updated Name")
-                .param("city", "Updated City")
-                .param("neighborhood", "Updated Neighbourhood")
-                .param("cep","12230000");
+                .param("code", "ABC123")
+                .param("name", "Restaurante Atualizado")
+                .param("city", "São Paulo")
+                .param("neighborhood", "Centro")
+                .param("cep","01001000");
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().is3xxRedirection())

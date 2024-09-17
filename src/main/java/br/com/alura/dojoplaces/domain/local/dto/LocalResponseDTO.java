@@ -51,20 +51,4 @@ public class LocalResponseDTO {
         return daysSinceLastUpdate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LocalResponseDTO that = (LocalResponseDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(code, that.code) &&
-                Objects.equals(creationDate, that.creationDate) &&
-                Objects.equals(daysSinceLastUpdate, that.daysSinceLastUpdate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, code, creationDate, daysSinceLastUpdate);
-    }
 }

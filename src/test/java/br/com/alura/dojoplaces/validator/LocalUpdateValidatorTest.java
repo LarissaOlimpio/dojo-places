@@ -28,7 +28,7 @@ class LocalUpdateValidatorTest {
 
     @Test
     void validate__should_return_false_when_code_is_not_repeated() {
-        String code = "123456";
+        String code = "ABC123";
 
         LocalUpdateDTO localUpdateDTO = new LocalUpdateDTO();
         localUpdateDTO.setCode(code);
@@ -42,7 +42,7 @@ class LocalUpdateValidatorTest {
 
     @Test
     void validate__should_return_true_when_code_is_repeated() {
-        String code = "123456";
+        String code = "ABC123";
         Long updateId = 1L;
 
         LocalUpdateDTO localUpdateDTO = new LocalUpdateDTO();

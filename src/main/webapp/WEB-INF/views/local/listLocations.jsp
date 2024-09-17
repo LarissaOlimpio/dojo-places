@@ -6,9 +6,17 @@
     <title>Locais</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/tableLocals/table.css">
 
+
 </head>
 <body>
-<h2>Locais</h2>
+<div class="container">
+    <h2>Locais</h2>
+    <form action="<c:url value="/local/create" />" method="get">
+        <input  class="button newLocal" type="submit" value="Cadastrar Novo Local" >
+    </form>
+</div>
+
+<div>
 <table>
     <thead>
     <tr>
@@ -29,16 +37,19 @@
             <td>${localResponseDTOList.creationDate}</td>
             <td>${localResponseDTOList.daysSinceLastUpdate}</td>
             <td class="actions">
-                <form action="/local/update/${localResponseDTOList.id}" method="get">
-                    <input class="button" type="submit" value="Editar">
-                </form>
-                <form action="/local/delete/${localResponseDTOList.id}" method="post" onsubmit="return confirm('Tem certeza de que deseja deletar este local?');">
-                    <input type="submit" value="Deletar">
-                </form>
+                <div class="div-button">
+                    <form action="/local/update/${localResponseDTOList.id}" method="get">
+                        <input class="button edit" type="submit" value="Editar">
+                    </form>
+                    <form action="/local/delete/${localResponseDTOList.id}" method="post" onsubmit="return confirm('Tem certeza de que deseja deletar este local?');">
+                        <input class="button delete" type="submit" value="Deletar">
+                    </form>
+                </div>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+</div>
 </body>
 </html>

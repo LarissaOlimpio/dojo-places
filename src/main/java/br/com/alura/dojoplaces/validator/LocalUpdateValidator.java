@@ -12,9 +12,10 @@ import org.springframework.validation.Validator;
 public class LocalUpdateValidator implements Validator {
 
     private static final Logger logger = LoggerFactory.getLogger(LocalUpdateValidator.class);
+    private static final String ERROR_CODE_EXISTS = "Um local com este código já existe";
+
     private final LocalRepository localRepository;
 
-    private static final String ERROR_CODE_EXISTS = "Um local com este código já existe";
 
     public LocalUpdateValidator(LocalRepository localRepository) {
         this.localRepository = localRepository;

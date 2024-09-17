@@ -3,42 +3,44 @@
 <html>
 <head>
     <title>Atualizar Local</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/form/form.css">
 </head>
 <body>
-<div>
+<div class="form-container">
     <h1>Formulário de atualização de local</h1>
     <form:form modelAttribute="localUpdateDTO" method="post" action="/local/update">
         <form:hidden path="id"/>
-        <h3>Preencher por CEP: </h3>
+        <p>Preencher por CEP: </p>
         <label>
             Cep:
             <form:input path="cep"/>
-            <form:errors path="cep"/>
+            <form:errors path="cep" cssClass="error"/>
         </label>
         <div>
             <label>Nome:</label>
             <form:input path="name"/>
-            <form:errors path="name"/>
+            <form:errors path="name" cssClass="error"/>
         </div>
         <div>
             <label>Código:</label>
             <form:input path="code"/>
-            <form:errors path="code"/>
+            <form:errors path="code" cssClass="error"/>
         </div>
         <div>
             <label>Bairro:</label>
             <form:input path="neighborhood"/>
-            <form:errors path="neighborhood"/>
+            <form:errors path="neighborhood" cssClass="error"/>
         </div>
         <div>
             <label>Cidade:</label>
-            <form:input path="city" />
-            <form:errors path="city"/>
+            <form:input path="city"/>
+            <form:errors path="city" cssClass="error"/>
         </div>
-        <form:button>Atualizar</form:button>
+        <div class="button">
+            <form:button>Atualizar</form:button>
+        </div>
     </form:form>
 </div>
-</body>
 <script src="/assets/js/searchCepWithApi.js"></script>
+</body>
 </html>
-
